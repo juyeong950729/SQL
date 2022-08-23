@@ -92,6 +92,9 @@ alter table `User5` add `hp` varchar(20);
 alter table `User5` add `birth` char(10) default '0000-00-00' after `name`;
 alter table `User5` add `uid` varchar(10) primary key first;
 
+insert into `User5` values ('A101', '김유신', '2001-01-01', 22, '김해시', '010-1234-1001');
+insert into `User5` values ('A102', '김춘추', '2000-01-01', 23, '김해시', '010-1234-1002');
+
 # 실습 2-12
 alter table `User5` modify `hp` char(13);
 alter table `User5` modify `age` tinyint;
@@ -103,6 +106,8 @@ alter table `User5` change column `addr` `address` varchar(100);
 alter table `User5` drop `gender`;
 
 # 실습 2-15
-# 실습 2-16
+create table `User6` like `User5`;
 
+# 실습 2-16
+insert into `User6` select * from `User5`;
 

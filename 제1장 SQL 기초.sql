@@ -131,7 +131,16 @@ select * from `TblUser` where `userID` = 'P104' or `userID` = 'p105';
 select * from `TblUser` where `userAddr` = '신라';
 select * from `TblUser` where `userAge` > 30;
 select * from `TblUser` where `userHP` is null;
-update `` set `` = '' where `` = '';
+update `TblUser` set `userAge` = 42 where `userID` = 'p104';
+update `TblUser` set `userAddr` = '경남 김해시' where `userID` = 'p105';
+delete from `TblUser` where `userID` = 'P103';
+
+select * from `TblProduct`;
+select `prdName` from `TblProduct`;
+select `prdName`, `prdPrice` from `TblProduct`;
+select * from `TblProduct` where `prdCompany` = 'LG';
+select * from `TblProduct` where `prdCompany` = '삼성';
+update `TblProduct` set `prdCompany` = '삼성', `prdMakeDate` = '2021-01-01' where `prdCode` = 5;
 
 
 
