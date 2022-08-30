@@ -82,13 +82,13 @@ select*from `product`;
 select `company` from `product`;
 
 # 실습 1-8
-select `` from `product`;
+select distinct `company` from `product`;
 
 # 실습 1-9
 select `prodName`, `price` from `product`;
 
 # 실습 1-10
-select `prodName`, `price`
+select `prodName`, `price` + 500 as `조정단가`
 	from `product`;
 
 # 실습 1-11
@@ -120,13 +120,14 @@ select*from `customer` where `hp` is null;
 
 # 실습 1-18
 select*from `customer` where `addr` like '%';
+select*from `customer` where `addr` is not null;
 
 # 실습 1-19
 select*from `customer` order by `rdate` desc; 
 
 # 실습 1-20
 select*from `order` where `ordercount` >= 3
-order by `ordercount` desc, `orderNo` asc;
+order by `ordercount` desc, `orderProduct` asc;
 
 # 실습 1-21
 select avg(price) from `product`;
@@ -136,30 +137,30 @@ select sum(stock) as `재고량 합계` from `product`
 	where `company`='농심';
 
 # 실습 1-23
-select count(*) as `고객수` from `Customer`;
+select count(`custId`) as `고객수` from `Customer`;
 
 # 실습 1-24
-select count(company) as `제조업체 수` from `product`;
+select count(distinct `company`) as `제조업체 수` from `product`;
 
 # 실습 1-25
 select `orderproduct` as `주문 상품번호`,
-sum(ordercount) as `총 주문수량` from `order` ;
+sum(`ordercount`) as `총 주문수량` from `order` group by `orderproduct` ;
 
 # 실습 1-26
 select `company` as `제조업체`,
 count(*) as `제품수`,
-max(`price`) as `최고가` from `product`;
+max(`price`) as `최고가` from `product` group by `company`;
 
 # 실습 1-27
 select `company` as `제조업체`,
 count(*) as `제품수`,
 max(`price`) as `최고가`
 from `product`
-group by `company`;
+group by `company` having `제품수`>=2;
 
 # 실습 1-28
-select `orderproduct`, `orderid`, sum(`ordercount`)
-as `총 주문수량` from `order`;
+select `orderProduct`, `orderId`, sum(`orderCount`) as `총 주문수량`
+ from `order` group by `orderProduct`, `orderId`;
 
 # 실습 1-29
 select a.orderID, b.prodName from `order` as a
@@ -174,4 +175,4 @@ select `orderid`, `name`, `prodname`, `orderdate`
 	on a.orderid = b.custid
 	join `product` as c
 	on a.orderproduct = c.prodno
-	where `orderDate` = '2022-07-03%';
+	where `orderDate` like '2022-07-03 __:__:__';
